@@ -1,0 +1,121 @@
+id,faixa_etaria,renda_familiar,local_compra,frequencia_compra,atributo_principal,conhece_produtor_local,canal_info,formato_conteudo,barreira_compra,disposicao_pagar_kg,intencao_compra,satisfacao_atual
+1,18 a 24,2 a 4 SM,Feira livre,Raramente,Qualidade/sabor,Sim,Instagram,Receita,Dúvida sobre higiene,8.50,4,3
+2,35 a 44,Até 2 SM,Feira livre,Semanal,Higiene e selo de inspeção,Sim,Indicação de conhecidos,História do produtor,Não conheço a marca,6.50,4,4
+3,60 ou mais,Acima de 8 SM,Direto do produtor,Raramente,Preço,Sim,WhatsApp,Receita,Não encontro onde comprar,11.00,5,3
+4,18 a 24,4 a 8 SM,Supermercado,Quinzenal,Preço,Não,Instagram,Vídeo curto,Preço alto,10.00,3,2
+5,35 a 44,Acima de 8 SM,Supermercado,Quinzenal,Embalagem,Não,Facebook,Vídeo curto,Não encontro onde comprar,16.00,4,3
+6,18 a 24,2 a 4 SM,Feira livre,Quinzenal,Qualidade/sabor,Não,Instagram,Foto com preço,Preço alto,8.00,5,2
+7,35 a 44,2 a 4 SM,Feira livre,Quinzenal,Higiene e selo de inspeção,Não,Instagram,Promoção/cupom,Preço alto,11.00,4,4
+8,35 a 44,2 a 4 SM,Feira livre,Quinzenal,Embalagem,Sim,Instagram,Receita,Dúvida sobre higiene,12.00,5,2
+9,60 ou mais,4 a 8 SM,Supermercado,Raramente,Qualidade/sabor,Não,Indicação de conhecidos,Receita,Preço alto,18.00,2,4
+10,18 a 24,Até 2 SM,Feira livre,Semanal,Origem regional,Não,Instagram,Vídeo curto,Não encontro onde comprar,9.50,2,2
+11,18 a 24,4 a 8 SM,Supermercado,Mensal,Higiene e selo de inspeção,Não,Instagram,Receita,Não encontro onde comprar,12.50,5,3
+12,35 a 44,4 a 8 SM,Supermercado,Quinzenal,Origem regional,Não,Indicação de conhecidos,Receita,Não encontro onde comprar,10.50,3,1
+13,45 a 59,Acima de 8 SM,Supermercado,Quinzenal,Higiene e selo de inspeção,Não,WhatsApp,Vídeo curto,Não encontro onde comprar,16.00,3,3
+14,45 a 59,Até 2 SM,Feira livre,Quinzenal,Preço,Sim,WhatsApp,Promoção/cupom,Não conheço a marca,10.00,4,3
+15,35 a 44,2 a 4 SM,Supermercado,Mensal,Origem regional,Sim,Instagram,Foto com preço,Nenhuma,15.00,4,4
+16,45 a 59,Até 2 SM,Direto do produtor,Raramente,Qualidade/sabor,Não,Indicação de conhecidos,Receita,Nenhuma,8.00,5,5
+17,25 a 34,2 a 4 SM,Feira livre,Semanal,Qualidade/sabor,Não,Instagram,Foto com preço,Dúvida sobre higiene,10.00,4,3
+18,18 a 24,4 a 8 SM,Direto do produtor,Mensal,Higiene e selo de inspeção,Sim,Rádio local,Promoção/cupom,Não conheço a marca,15.50,3,4
+19,45 a 59,2 a 4 SM,Mercearia do bairro,Quinzenal,Qualidade/sabor,Não,Facebook,Receita,Não encontro onde comprar,11.00,2,3
+20,25 a 34,Até 2 SM,Feira livre,Semanal,Preço,Não,WhatsApp,História do produtor,Dúvida sobre higiene,8.00,4,3
+21,35 a 44,2 a 4 SM,Supermercado,Mensal,Qualidade/sabor,Sim,WhatsApp,Vídeo curto,Preço alto,14.00,3,3
+22,18 a 24,Até 2 SM,Supermercado,Mensal,Preço,Não,Instagram,História do produtor,Não conheço a marca,8.50,3,2
+23,60 ou mais,2 a 4 SM,Supermercado,Quinzenal,Embalagem,Não,Facebook,Promoção/cupom,Não conheço a marca,13.00,3,4
+24,45 a 59,2 a 4 SM,Supermercado,Mensal,Qualidade/sabor,Não,Indicação de conhecidos,Foto com preço,Dúvida sobre higiene,11.00,3,5
+25,35 a 44,2 a 4 SM,Feira livre,Mensal,Qualidade/sabor,Não,WhatsApp,Foto com preço,Preço alto,10.00,2,4
+26,25 a 34,2 a 4 SM,Supermercado,Quinzenal,Qualidade/sabor,Sim,Instagram,História do produtor,Nenhuma,12.00,4,2
+27,25 a 34,Até 2 SM,Supermercado,Quinzenal,Preço,Sim,Instagram,Promoção/cupom,Não conheço a marca,9.50,3,2
+28,35 a 44,Até 2 SM,Feira livre,Mensal,Preço,Não,WhatsApp,Promoção/cupom,Preço alto,6.00,4,3
+29,45 a 59,Acima de 8 SM,Mercearia do bairro,Quinzenal,Embalagem,Não,WhatsApp,Promoção/cupom,Preço alto,16.00,4,2
+30,35 a 44,4 a 8 SM,Feira livre,Semanal,Origem regional,Sim,Rádio local,Promoção/cupom,Dúvida sobre higiene,13.50,5,2
+31,45 a 59,2 a 4 SM,Supermercado,Quinzenal,Origem regional,Sim,Indicação de conhecidos,Promoção/cupom,Não encontro onde comprar,13.50,5,2
+32,60 ou mais,2 a 4 SM,Mercearia do bairro,Quinzenal,Origem regional,Sim,Facebook,Vídeo curto,Dúvida sobre higiene,12.00,4,4
+33,18 a 24,2 a 4 SM,Direto do produtor,Semanal,Qualidade/sabor,Não,Instagram,Promoção/cupom,Não encontro onde comprar,11.50,3,2
+34,35 a 44,4 a 8 SM,Mercearia do bairro,Raramente,Embalagem,Sim,Facebook,Foto com preço,Não conheço a marca,12.00,5,5
+35,35 a 44,4 a 8 SM,Feira livre,Semanal,Preço,Sim,WhatsApp,Foto com preço,Não conheço a marca,16.00,5,1
+36,45 a 59,2 a 4 SM,Feira livre,Mensal,Preço,Não,WhatsApp,Receita,Dúvida sobre higiene,11.00,3,2
+37,35 a 44,Até 2 SM,Direto do produtor,Semanal,Preço,Sim,Indicação de conhecidos,Foto com preço,Preço alto,7.00,3,4
+38,45 a 59,2 a 4 SM,Supermercado,Mensal,Qualidade/sabor,Não,WhatsApp,História do produtor,Preço alto,10.00,3,2
+39,18 a 24,4 a 8 SM,Feira livre,Semanal,Qualidade/sabor,Não,Instagram,Promoção/cupom,Preço alto,15.00,4,3
+40,35 a 44,Até 2 SM,Supermercado,Quinzenal,Preço,Sim,Indicação de conhecidos,História do produtor,Preço alto,13.50,3,1
+41,60 ou mais,4 a 8 SM,Mercearia do bairro,Mensal,Preço,Sim,WhatsApp,Foto com preço,Nenhuma,12.50,4,3
+42,25 a 34,2 a 4 SM,Feira livre,Mensal,Preço,Não,Instagram,Vídeo curto,Não encontro onde comprar,10.00,5,4
+43,25 a 34,Até 2 SM,Supermercado,Quinzenal,Preço,Não,WhatsApp,História do produtor,Não conheço a marca,9.50,4,3
+44,35 a 44,2 a 4 SM,Supermercado,Quinzenal,Preço,Não,Facebook,Receita,Não encontro onde comprar,11.50,3,4
+45,25 a 34,4 a 8 SM,Mercearia do bairro,Raramente,Higiene e selo de inspeção,Não,Instagram,Foto com preço,Não conheço a marca,13.50,5,3
+46,35 a 44,Até 2 SM,Direto do produtor,Quinzenal,Origem regional,Sim,WhatsApp,Promoção/cupom,Preço alto,10.50,4,3
+47,25 a 34,Até 2 SM,Direto do produtor,Mensal,Preço,Não,Instagram,Foto com preço,Não encontro onde comprar,6.50,4,3
+48,25 a 34,Até 2 SM,Mercearia do bairro,Raramente,Qualidade/sabor,Sim,Rádio local,Promoção/cupom,Não conheço a marca,11.00,4,3
+49,35 a 44,Até 2 SM,Feira livre,Semanal,Preço,Não,Facebook,História do produtor,Não encontro onde comprar,10.00,3,2
+50,25 a 34,Acima de 8 SM,Supermercado,Mensal,Preço,Sim,Instagram,Promoção/cupom,Dúvida sobre higiene,13.50,5,4
+51,45 a 59,Até 2 SM,Feira livre,Semanal,Origem regional,Não,WhatsApp,Foto com preço,Não conheço a marca,10.00,4,3
+52,25 a 34,Até 2 SM,Feira livre,Quinzenal,Preço,Sim,WhatsApp,Foto com preço,Não conheço a marca,9.00,3,4
+53,18 a 24,2 a 4 SM,Direto do produtor,Semanal,Qualidade/sabor,Sim,Instagram,História do produtor,Dúvida sobre higiene,11.50,5,4
+54,45 a 59,2 a 4 SM,Feira livre,Mensal,Qualidade/sabor,Sim,Rádio local,Foto com preço,Não encontro onde comprar,12.50,5,3
+55,35 a 44,4 a 8 SM,Direto do produtor,Raramente,Origem regional,Sim,Rádio local,Receita,Não encontro onde comprar,17.50,3,3
+56,45 a 59,2 a 4 SM,Supermercado,Semanal,Origem regional,Sim,Rádio local,Promoção/cupom,Não encontro onde comprar,13.50,5,3
+57,60 ou mais,4 a 8 SM,Supermercado,Quinzenal,Qualidade/sabor,Não,Rádio local,Promoção/cupom,Preço alto,15.50,4,1
+58,35 a 44,2 a 4 SM,Feira livre,Raramente,Origem regional,Sim,WhatsApp,História do produtor,Preço alto,11.50,3,5
+59,35 a 44,2 a 4 SM,Supermercado,Quinzenal,Qualidade/sabor,Não,WhatsApp,Promoção/cupom,Não conheço a marca,9.50,4,2
+60,35 a 44,Até 2 SM,Mercearia do bairro,Semanal,Qualidade/sabor,Sim,Facebook,Foto com preço,Nenhuma,8.50,4,3
+61,35 a 44,Até 2 SM,Mercearia do bairro,Raramente,Origem regional,Sim,Instagram,Foto com preço,Nenhuma,10.50,3,1
+62,25 a 34,2 a 4 SM,Feira livre,Quinzenal,Higiene e selo de inspeção,Não,Instagram,Foto com preço,Não encontro onde comprar,11.00,4,3
+63,18 a 24,2 a 4 SM,Supermercado,Quinzenal,Preço,Sim,Instagram,História do produtor,Não encontro onde comprar,9.00,3,4
+64,25 a 34,Até 2 SM,Supermercado,Semanal,Preço,Sim,WhatsApp,Promoção/cupom,Preço alto,8.00,4,3
+65,25 a 34,4 a 8 SM,Feira livre,Raramente,Qualidade/sabor,Sim,Indicação de conhecidos,Vídeo curto,Dúvida sobre higiene,14.50,3,4
+66,18 a 24,Acima de 8 SM,Mercearia do bairro,Mensal,Higiene e selo de inspeção,Não,Indicação de conhecidos,Promoção/cupom,Nenhuma,14.00,5,3
+67,60 ou mais,Até 2 SM,Supermercado,Mensal,Preço,Sim,Facebook,Vídeo curto,Nenhuma,11.00,5,2
+68,35 a 44,2 a 4 SM,Feira livre,Semanal,Preço,Não,Instagram,Foto com preço,Não encontro onde comprar,10.00,3,3
+69,45 a 59,Até 2 SM,Supermercado,Mensal,Preço,Sim,WhatsApp,História do produtor,Não encontro onde comprar,10.00,5,3
+70,60 ou mais,4 a 8 SM,Direto do produtor,Mensal,Preço,Não,Facebook,Foto com preço,Preço alto,11.50,3,3
+71,25 a 34,Acima de 8 SM,Feira livre,Quinzenal,Preço,Não,Instagram,História do produtor,Não conheço a marca,13.50,3,3
+72,25 a 34,2 a 4 SM,Direto do produtor,Mensal,Qualidade/sabor,Não,Rádio local,Foto com preço,Dúvida sobre higiene,12.50,3,2
+73,25 a 34,2 a 4 SM,Mercearia do bairro,Mensal,Preço,Não,WhatsApp,Vídeo curto,Não conheço a marca,10.00,4,3
+74,25 a 34,Até 2 SM,Feira livre,Semanal,Preço,Sim,Indicação de conhecidos,Foto com preço,Não encontro onde comprar,10.50,4,4
+75,45 a 59,4 a 8 SM,Direto do produtor,Quinzenal,Origem regional,Sim,WhatsApp,Foto com preço,Não encontro onde comprar,14.50,4,4
+76,45 a 59,4 a 8 SM,Feira livre,Raramente,Origem regional,Sim,WhatsApp,Foto com preço,Não conheço a marca,17.50,4,2
+77,35 a 44,2 a 4 SM,Feira livre,Raramente,Origem regional,Sim,Rádio local,Foto com preço,Preço alto,15.50,4,3
+78,35 a 44,2 a 4 SM,Feira livre,Quinzenal,Preço,Sim,WhatsApp,Vídeo curto,Não conheço a marca,11.50,4,4
+79,25 a 34,Acima de 8 SM,Feira livre,Mensal,Higiene e selo de inspeção,Não,Instagram,História do produtor,Nenhuma,12.00,4,3
+80,25 a 34,2 a 4 SM,Feira livre,Mensal,Higiene e selo de inspeção,Não,Indicação de conhecidos,Receita,Preço alto,13.00,4,2
+81,18 a 24,Até 2 SM,Supermercado,Mensal,Preço,Não,Instagram,Vídeo curto,Não encontro onde comprar,9.00,4,3
+82,35 a 44,2 a 4 SM,Mercearia do bairro,Mensal,Preço,Sim,Rádio local,Vídeo curto,Não encontro onde comprar,11.50,4,4
+83,35 a 44,Até 2 SM,Supermercado,Mensal,Higiene e selo de inspeção,Não,Instagram,Receita,Não encontro onde comprar,9.00,4,1
+84,18 a 24,Acima de 8 SM,Direto do produtor,Quinzenal,Embalagem,Sim,Instagram,Foto com preço,Nenhuma,16.00,4,3
+85,35 a 44,4 a 8 SM,Mercearia do bairro,Quinzenal,Preço,Sim,Indicação de conhecidos,Receita,Preço alto,12.00,4,4
+86,45 a 59,Até 2 SM,Direto do produtor,Mensal,Preço,Sim,Indicação de conhecidos,Foto com preço,Não conheço a marca,6.50,3,3
+87,25 a 34,4 a 8 SM,Mercearia do bairro,Quinzenal,Higiene e selo de inspeção,Não,WhatsApp,Foto com preço,Não encontro onde comprar,12.00,3,3
+88,45 a 59,Até 2 SM,Mercearia do bairro,Mensal,Preço,Sim,Facebook,Promoção/cupom,Preço alto,11.50,4,3
+89,60 ou mais,2 a 4 SM,Supermercado,Quinzenal,Embalagem,Não,Facebook,Foto com preço,Preço alto,10.00,3,4
+90,45 a 59,2 a 4 SM,Feira livre,Mensal,Preço,Sim,Indicação de conhecidos,Foto com preço,Preço alto,11.50,3,4
+91,25 a 34,2 a 4 SM,Feira livre,Raramente,Qualidade/sabor,Não,Indicação de conhecidos,Vídeo curto,Preço alto,11.50,4,4
+92,18 a 24,Até 2 SM,Supermercado,Semanal,Origem regional,Não,Rádio local,Receita,Não encontro onde comprar,9.00,3,2
+93,35 a 44,Até 2 SM,Supermercado,Quinzenal,Qualidade/sabor,Não,Rádio local,História do produtor,Não encontro onde comprar,7.00,3,3
+94,60 ou mais,2 a 4 SM,Supermercado,Mensal,Qualidade/sabor,Não,Facebook,Promoção/cupom,Preço alto,12.00,4,3
+95,18 a 24,2 a 4 SM,Mercearia do bairro,Semanal,Preço,Sim,Instagram,Receita,Dúvida sobre higiene,8.00,5,3
+96,45 a 59,4 a 8 SM,Feira livre,Quinzenal,Higiene e selo de inspeção,Não,WhatsApp,Foto com preço,Dúvida sobre higiene,12.00,4,3
+97,18 a 24,2 a 4 SM,Supermercado,Quinzenal,Qualidade/sabor,Não,Instagram,História do produtor,Não encontro onde comprar,12.00,4,4
+98,18 a 24,2 a 4 SM,Direto do produtor,Quinzenal,Preço,Não,WhatsApp,Vídeo curto,Não conheço a marca,11.50,3,2
+99,35 a 44,2 a 4 SM,Supermercado,Mensal,Embalagem,Não,Rádio local,Receita,Não conheço a marca,10.50,5,1
+100,25 a 34,Acima de 8 SM,Direto do produtor,Quinzenal,Embalagem,Não,WhatsApp,Foto com preço,Nenhuma,14.50,5,3
+101,25 a 34,Até 2 SM,Mercearia do bairro,Mensal,Qualidade/sabor,Não,Instagram,Promoção/cupom,Não conheço a marca,11.50,2,3
+102,45 a 59,2 a 4 SM,Mercearia do bairro,Semanal,Embalagem,Sim,Facebook,Foto com preço,Não encontro onde comprar,13.50,5,3
+103,45 a 59,2 a 4 SM,Feira livre,Semanal,Higiene e selo de inspeção,Não,Instagram,História do produtor,Não conheço a marca,14.00,4,4
+104,60 ou mais,2 a 4 SM,Feira livre,Mensal,Preço,Não,Facebook,Promoção/cupom,Dúvida sobre higiene,9.50,2,4
+105,18 a 24,2 a 4 SM,Feira livre,Raramente,Preço,Sim,Indicação de conhecidos,Promoção/cupom,Nenhuma,10.50,5,3
+106,60 ou mais,2 a 4 SM,Direto do produtor,Semanal,Higiene e selo de inspeção,Não,WhatsApp,Foto com preço,Dúvida sobre higiene,12.50,3,2
+107,45 a 59,2 a 4 SM,Supermercado,Quinzenal,Preço,Sim,Instagram,Vídeo curto,Preço alto,9.50,4,2
+108,45 a 59,Acima de 8 SM,Supermercado,Quinzenal,Origem regional,Não,Indicação de conhecidos,Promoção/cupom,Preço alto,16.50,4,4
+109,25 a 34,Até 2 SM,Supermercado,Mensal,Qualidade/sabor,Não,Instagram,Promoção/cupom,Não encontro onde comprar,9.00,5,4
+110,18 a 24,Até 2 SM,Direto do produtor,Mensal,Preço,Não,Facebook,Promoção/cupom,Preço alto,7.50,3,2
+111,18 a 24,4 a 8 SM,Supermercado,Semanal,Higiene e selo de inspeção,Sim,Instagram,Receita,Preço alto,14.00,5,3
+112,60 ou mais,2 a 4 SM,Supermercado,Quinzenal,Preço,Não,Indicação de conhecidos,História do produtor,Dúvida sobre higiene,13.00,5,4
+113,25 a 34,Até 2 SM,Mercearia do bairro,Mensal,Preço,Não,WhatsApp,Receita,Não encontro onde comprar,12.50,2,4
+114,18 a 24,Até 2 SM,Supermercado,Semanal,Embalagem,Não,WhatsApp,História do produtor,Não conheço a marca,10.00,1,3
+115,18 a 24,2 a 4 SM,Supermercado,Quinzenal,Embalagem,Não,Instagram,História do produtor,Não encontro onde comprar,9.00,4,4
+116,25 a 34,Até 2 SM,Supermercado,Semanal,Qualidade/sabor,Não,Rádio local,Vídeo curto,Preço alto,6.50,3,3
+117,18 a 24,Até 2 SM,Supermercado,Quinzenal,Qualidade/sabor,Não,WhatsApp,Promoção/cupom,Não encontro onde comprar,6.00,3,5
+118,25 a 34,Até 2 SM,Direto do produtor,Mensal,Origem regional,Não,Instagram,Vídeo curto,Preço alto,14.00,2,3
+119,35 a 44,2 a 4 SM,Supermercado,Mensal,Qualidade/sabor,Não,WhatsApp,Receita,Dúvida sobre higiene,14.00,4,4
+120,25 a 34,4 a 8 SM,Supermercado,Mensal,Higiene e selo de inspeção,Não,Indicação de conhecidos,Promoção/cupom,Nenhuma,14.50,3,2

@@ -1,0 +1,91 @@
+# Sistema de Campanhas de Marketing Agroindustrial — RStudio
+
+## 1. Estrutura
+- `app.R`: aplicativo Shiny.
+- `INICIAR_APP.R`: inicializador.
+- `.Renviron.example`: modelo de variáveis de configuração da Meta.
+- `dados/`: criado automaticamente para produtos, contatos, campanhas, mídias e logs.
+
+## 2. Instalação e execução
+1. Extraia o ZIP em uma pasta do computador.
+2. Abra o RStudio.
+3. Use **File > Open Project** (ou abra a pasta pelo RStudio).
+4. Abra `INICIAR_APP.R`.
+5. Execute:
+   ```r
+   source("INICIAR_APP.R", encoding = "UTF-8")
+   ```
+6. O navegador abrirá o aplicativo.
+
+O modo de planejamento, cadastro e simulação funciona sem credenciais Meta.
+
+## 3. Configurar as credenciais Meta
+1. Faça uma cópia de `.Renviron.example` chamada `.Renviron` na pasta do projeto.
+2. Substitua os valores de exemplo pelas credenciais reais obtidas no Meta for Developers / WhatsApp Manager.
+3. Reinicie o RStudio para carregar as variáveis.
+4. Não compartilhe o arquivo `.Renviron`, tokens, IDs privados ou a base de contatos.
+
+Variáveis:
+- `META_ACCESS_TOKEN`
+- `WA_PHONE_NUMBER_ID`
+- `WA_TEMPLATE_NAME`
+- `WA_TEMPLATE_LANG`
+- `IG_USER_ID`
+- `FB_PAGE_ID`
+- `FB_PAGE_ACCESS_TOKEN`
+- `META_API_VERSION`
+
+A versão inicial usa `v27.0` como padrão; confirme a versão atualmente disponível para seu aplicativo no painel da Meta antes de produção.
+
+## 4. WhatsApp
+O envio utiliza modelo aprovado. O modelo configurado em `WA_TEMPLATE_NAME` deve ter corpo com três variáveis posicionais:
+- `{{1}}`: nome da campanha
+- `{{2}}`: produto
+- `{{3}}`: chamada para ação
+
+Idioma padrão: `pt_BR`. Ajuste `WA_TEMPLATE_LANG` se o modelo aprovado usar outro idioma.
+
+A empresa deve obter consentimento e cumprir as regras de modelos, categorias, qualidade e janela de atendimento da Meta. O aplicativo não tenta contornar a janela de atendimento.
+
+## 5. Instagram e Facebook
+- Instagram: a conta deve ser profissional e configurada conforme os requisitos da Meta. Para publicar no Instagram, o app requer URL HTTPS pública de uma imagem acessível pelos servidores da Meta.
+- Instagram Direct: requer identificador de destinatário elegível e permissões aplicáveis; a pessoa deve ter iniciado/interagido com a conta conforme as regras vigentes.
+- Facebook Page: publicação requer token da Página e permissões de gerenciamento de conteúdo.
+- Messenger: requer Page-scoped ID elegível, permissão `pages_messaging` e respeito à janela/regras de mensagens.
+
+A obtenção de IDs de destinatários e o processo de revisão/permissões da Meta precisam ser concluídos fora do aplicativo. Esta versão não contém webhook para captura automática de novas conversas.
+
+## 6A. Pesquisa de mercado (nova aba)
+A aba **Pesquisa de mercado** analisa as respostas de um questionário (CSV, uma linha por respondente):
+- **Carregar base de exemplo**: usa `dados/exemplo_pesquisa.csv` (120 respostas FICTÍCIAS, apenas para aula).
+- **Importar respostas (CSV)**: use a base coletada pela turma, com os mesmos nomes de colunas do roteiro.
+- **Baixar roteiro do questionário**: entrega `dados/roteiro_questionario.txt` com as 12 perguntas e o nome da coluna de cada uma.
+- Gráfico e tabela de frequência (ou estatísticas para variáveis numéricas), cruzamento entre duas variáveis e o quadro **Do dado à campanha**, que traduz os resultados em decisões (mensagem, canal, praça, barreira, formato, preço).
+
+A base de produtos já vem com três produtos de exemplo (farinha de mandioca, polpa de cupuaçu e mel) para a prática em sala; apague ou edite `dados/produtos.csv` se preferir começar vazio.
+
+## 6. Importação de contatos
+Na aba Contatos, baixe o modelo CSV. Preserve exatamente os nomes das colunas:
+`nome, telefone, instagram_id, facebook_id, consentimento, whatsapp_optin, instagram_optin, facebook_optin, observacao`
+
+Use `TRUE` somente quando o consentimento/opt-in correspondente estiver efetivamente documentado. Para WhatsApp, informe o telefone com código do país e DDD, somente números (ex.: 5565999999999).
+
+Não importe listas compradas nem contate pessoas sem autorização.
+
+## 7. Limitações desta versão
+- Não agenda publicações.
+- Não possui webhook para receber respostas ou sincronizar conversas.
+- Não cria anúncios pagos nem gerencia orçamento de mídia.
+- Não busca automaticamente seguidores, telefones ou IDs de usuários.
+- Não garante aprovação de permissões, templates ou conteúdo pela Meta.
+- A publicação no Instagram é somente imagem + legenda, com URL pública HTTPS.
+- A integração deve ser testada primeiro com contas e contatos de teste.
+
+## 8. Documentação oficial
+- WhatsApp Business Platform: https://developers.facebook.com/documentation/business-messaging/whatsapp/overview
+- Instagram Messaging: https://developers.facebook.com/documentation/business-messaging/instagram-messaging
+- Messenger Platform: https://developers.facebook.com/docs/messenger-platform/
+- Meta for Developers: https://developers.facebook.com/docs/
+
+## 9. Segurança e LGPD
+Os dados de clientes são armazenados localmente em CSV. Restrinja o acesso à pasta `dados/`, mantenha cópias de segurança protegidas e implemente procedimentos para consulta, correção e exclusão de dados. Registre a origem e a finalidade do consentimento. Este aplicativo é uma base didática/operacional inicial, não substitui avaliação jurídica ou revisão de segurança antes do uso comercial em escala.

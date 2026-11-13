@@ -1,0 +1,60 @@
+ROTEIRO DE QUESTIONÁRIO – PESQUISA DE MERCADO PARA PRODUTO AGROINDUSTRIAL
+Universidade do Estado de Mato Grosso – UNEMAT
+Curso de Engenharia de Produção Agroindustrial – Disciplina de Marketing
+Prof. Dr. Ramão Humberto Martins Manvailer
+
+Objetivo: identificar o perfil do consumidor, os atributos valorizados, os canais de
+informação e as barreiras de compra de um produto agroindustrial regional
+(ex.: farinha de mandioca artesanal), para orientar a criação de uma campanha.
+
+Termo de abertura (ler ao respondente):
+"Esta pesquisa faz parte de uma atividade acadêmica da UNEMAT. A participação é
+voluntária e anônima. Os dados serão usados apenas para fins didáticos.
+Você aceita participar?"  ( ) Sim  ( ) Não -> encerrar
+
+Cada pergunta corresponde a uma coluna do arquivo CSV (nome entre colchetes).
+Mantenha os nomes das colunas para que o aplicativo gere as sugestões automáticas.
+
+1. [faixa_etaria] Qual a sua idade?
+   18 a 24 | 25 a 34 | 35 a 44 | 45 a 59 | 60 ou mais
+
+2. [renda_familiar] Qual a renda familiar mensal aproximada? (SM = salário mínimo)
+   Até 2 SM | 2 a 4 SM | 4 a 8 SM | Acima de 8 SM
+
+3. [local_compra] Onde você costuma comprar este produto?
+   Supermercado | Feira livre | Direto do produtor | Mercearia do bairro
+
+4. [frequencia_compra] Com que frequência compra?
+   Semanal | Quinzenal | Mensal | Raramente
+
+5. [atributo_principal] O que MAIS pesa na sua escolha? (marque só uma)
+   Qualidade/sabor | Preço | Origem regional | Higiene e selo de inspeção | Embalagem
+
+6. [conhece_produtor_local] Você conhece algum produtor/agroindústria local deste produto?
+   Sim | Não
+
+7. [canal_info] Por onde você mais fica sabendo de novos produtos de alimentação?
+   WhatsApp | Instagram | Facebook | Indicação de conhecidos | Rádio local
+
+8. [formato_conteudo] Que tipo de conteúdo mais chama sua atenção?
+   Vídeo curto | Foto com preço | Receita | História do produtor | Promoção/cupom
+
+9. [barreira_compra] O que mais impede você de comprar de agroindústrias locais?
+   Não encontro onde comprar | Preço alto | Não conheço a marca | Dúvida sobre higiene | Nenhuma
+
+10. [disposicao_pagar_kg] Quanto pagaria, no máximo, por 1 kg de um produto artesanal
+    de boa qualidade? (valor em R$, use ponto como separador decimal, ex.: 12.50)
+
+11. [intencao_compra] De 1 (nada provável) a 5 (muito provável), qual a chance de você
+    experimentar o produto da agroindústria local no próximo mês?
+
+12. [satisfacao_atual] De 1 (muito insatisfeito) a 5 (muito satisfeito), qual sua
+    satisfação com o produto que você compra hoje?
+
+Orientações de aplicação
+- Aplique em formulário on-line (Google Forms/Microsoft Forms) ou entrevista presencial.
+- Exporte as respostas para CSV, renomeie os cabeçalhos para os nomes entre colchetes
+  e inclua uma primeira coluna "id" (1, 2, 3...).
+- Não colete nome, telefone ou CPF na pesquisa: ela é anônima (LGPD). Quem quiser
+  receber ofertas deve se cadastrar separadamente, com consentimento registrado.
+- Registre: público-alvo, local e data da coleta, tipo de amostra e número de respondentes.
