@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Campanhas Agroindustriais</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: cabeçalho institucional, abas por etapa do trabalho (pesquisa → campanha → envio → relatório), painéis em grade que viram uma coluna no celular */
+:root{
+  --bg:#F4F7F5; --surface:#FFFFFF; --surface2:#E8F0EB; --ink:#18261E; --muted:#5B6B62; --line:#D3DED7;
+  --brand:#17633E; --brand-ink:#FFFFFF; --brand-soft:#DCEBE1; --accent:#C98A1B; --accent-soft:#F6E8CC;
+  --good:#1F7A4A; --warn:#9A5B00; --bad:#B4532A;
+  --f-display:'Archivo',system-ui,sans-serif; --f-body:'Atkinson Hyperlegible','Segoe UI',system-ui,sans-serif;
+  --r:10px; color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#111A15; --surface:#18231C; --surface2:#1F2D24; --ink:#E6EEE8; --muted:#9FB0A5; --line:#2E3E34;
+  --brand:#5FBF8A; --brand-ink:#0D1A12; --brand-soft:#1E3A2A; --accent:#E9AE48; --accent-soft:#3A2C12;
+  --good:#6FCB93; --warn:#E9AE48; --bad:#F08A6A; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --bg:#111A15; --surface:#18231C; --surface2:#1F2D24; --ink:#E6EEE8; --muted:#9FB0A5; --line:#2E3E34;
+  --brand:#5FBF8A; --brand-ink:#0D1A12; --brand-soft:#1E3A2A; --accent:#E9AE48; --accent-soft:#3A2C12;
+  --good:#6FCB93; --warn:#E9AE48; --bad:#F08A6A; color-scheme:dark;}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5}
+header{background:var(--brand);color:var(--brand-ink);padding:20px 20px 0}
+header .inst{font-size:13px;opacity:.9}
+header h1{font-family:var(--f-display);font-weight:800;font-size:clamp(22px,4vw,32px);margin:4px 0 2px;text-wrap:balance}
+header p{margin:0 0 14px;font-size:14px;opacity:.92}
+nav{display:flex;gap:4px;overflow-x:auto;padding-bottom:0}
+nav a{color:var(--brand-ink);text-decoration:none;padding:10px 14px;border-radius:8px 8px 0 0;font-weight:700;white-space:nowrap;opacity:.85}
+nav a .n{display:inline-block;min-width:20px;font-size:12px;opacity:.8;margin-right:4px}
+nav a[aria-current="page"]{background:var(--bg);color:var(--ink);opacity:1}
+nav a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+main{max-width:1180px;margin:0 auto;padding:20px 16px 48px}
+section[data-view]{display:none}
+section[data-view].on{display:block}
+.grid{display:grid;gap:16px;grid-template-columns:minmax(260px,1fr) 2fr}
+.grid2{display:grid;gap:16px;grid-template-columns:1fr 1fr}
+@media (max-width:820px){.grid,.grid2{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px}
+.card h2{font-family:var(--f-display);font-size:19px;margin:0 0 10px}
+.card h3{font-family:var(--f-display);font-size:16px;margin:14px 0 6px}
+.note{color:var(--muted);font-size:13.5px}
+label{display:block;font-weight:700;font-size:14px;margin:10px 0 4px}
+input[type=text],input[type=number],input[type=tel],select,textarea{width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:inherit}
+textarea{min-height:200px;resize:vertical}
+.chk{display:flex;gap:8px;align-items:flex-start;font-weight:400;margin:8px 0}
+.chk input{margin-top:4px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px}
+button,.btn{font:inherit;font-weight:700;border:1px solid var(--line);background:var(--surface2);color:var(--ink);padding:9px 14px;border-radius:8px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+button.primary,.btn.primary{background:var(--brand);border-color:var(--brand);color:var(--brand-ink)}
+.btn.wa{background:#1F8F55;border-color:#1F8F55;color:#fff}
+button:hover,.btn:hover{filter:brightness(1.05)}
+table{width:100%;border-collapse:collapse;font-size:14.5px;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:13px;color:var(--muted);font-weight:700}
+td.num,th.num{text-align:right}
+.tblwrap{overflow-x:auto}
+.bars{display:grid;gap:6px;margin:6px 0 12px}
+.bar{display:grid;grid-template-columns:minmax(110px,180px) 1fr 64px;gap:8px;align-items:center;font-size:14px}
+.bar .track{background:var(--surface2);border-radius:6px;height:22px;overflow:hidden}
+.bar .fill{background:var(--brand);height:100%;border-radius:6px}
+.bar.top .fill{background:var(--accent)}
+.bar .v{text-align:right;font-variant-numeric:tabular-nums}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+.stat{background:var(--surface2);border-radius:8px;padding:10px 12px}
+.stat b{display:block;font-family:var(--f-display);font-size:24px}
+.stat span{font-size:13px;color:var(--muted)}
+.chip{display:inline-block;font-size:12.5px;font-weight:700;padding:2px 8px;border-radius:99px;background:var(--brand-soft);color:var(--ink)}
+.chip.off{background:var(--surface2);color:var(--muted)}
+.chip.warn{background:var(--accent-soft)}
+ul.insights{padding-left:18px;margin:6px 0}
+ul.insights li{margin:6px 0}
+.preview{white-space:pre-wrap;background:var(--surface2);border-radius:8px;padding:12px;font-size:15px}
+.toast{position:fixed;right:16px;bottom:16px;background:var(--ink);color:var(--bg);padding:10px 14px;border-radius:8px;font-weight:700;opacity:0;transition:opacity .2s;pointer-events:none;max-width:320px}
+.toast.show{opacity:1}
+.empty{color:var(--muted);font-style:italic}
+.steps{counter-reset:s;list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.steps li{counter-increment:s;display:grid;grid-template-columns:28px 1fr;gap:8px}
+.steps li::before{content:counter(s);background:var(--brand);color:var(--brand-ink);border-radius:50%;width:26px;height:26px;display:grid;place-items:center;font-weight:700;font-size:14px}
+footer{max-width:1180px;margin:0 auto;padding:0 16px 24px;color:var(--muted);font-size:13px}
+@media (prefers-reduced-motion: reduce){.toast{transition:none}}
+</style>
+</head>
+<body>
+<header>
+  <div class="inst">Universidade do Estado de Mato Grosso – UNEMAT · Curso de Engenharia de Produção Agroindustrial · Disciplina de Marketing</div>
+  <h1>Campanhas de Marketing Agroindustrial</h1>
+  <p>Versão web do aplicativo da disciplina. Funciona no navegador, no computador ou no celular.</p>
+  <nav aria-label="Etapas">
+    <a href="#pesquisa"><span class="n">1</span>Pesquisa de mercado</a>
+    <a href="#produtos"><span class="n">2</span>Produtos</a>
+    <a href="#contatos"><span class="n">3</span>Contatos</a>
+    <a href="#campanha"><span class="n">4</span>Criar campanha</a>
+    <a href="#enviar"><span class="n">5</span>Enviar e publicar</a>
+    <a href="#relatorio"><span class="n">6</span>Relatório</a>
+  </nav>
+</header>
+<main>
+
+<section data-view="pesquisa">
+  <div class="grid">
+    <div class="card">
+      <h2>Dados da pesquisa</h2>
+      <p class="note">A base de exemplo traz 120 respostas fictícias sobre farinha de mandioca artesanal. Para usar a pesquisa do grupo, importe um CSV com uma linha por respondente e as colunas do roteiro.</p>
+      <div class="row">
+        <button class="primary" id="btnExemplo" type="button">Carregar base de exemplo</button>
+      </div>
+      <label for="arqCsv">Importar respostas (CSV)</label>
+      <input type="file" id="arqCsv" accept=".csv,text/csv">
+      <label for="selVar">Variável para analisar</label>
+      <select id="selVar"></select>
+      <label for="selCruz">Cruzar com (opcional)</label>
+      <select id="selCruz"></select>
+      <p><span class="chip" id="nResp">Nenhuma base carregada</span></p>
+      <h3>Roteiro do questionário</h3>
+      <p class="note">Nomes de coluna esperados: faixa_etaria, renda_familiar, local_compra, frequencia_compra, atributo_principal, conhece_produtor_local, canal_info, formato_conteudo, barreira_compra, disposicao_pagar_kg, intencao_compra, satisfacao_atual.</p>
+      <button type="button" id="btnRoteiro">Copiar roteiro do questionário</button>
+    </div>
+    <div style="display:grid;gap:16px">
+      <div class="card"><h2 id="tituloDist">Distribuição de respostas</h2><div id="dist"><p class="empty">Carregue a base de exemplo para começar.</p></div></div>
+      <div class="card"><h2>Cruzamento de variáveis</h2><p class="note">Categórica × categórica: % na linha. Numérica × categórica: média por grupo.</p><div id="cruz" class="tblwrap"><p class="empty">Escolha uma variável em “Cruzar com”.</p></div></div>
+      <div class="card"><h2>Do dado à campanha</h2><div id="insights"><p class="empty">As sugestões aparecem quando a base é carregada.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section data-view="produtos">
+  <div class="grid">
+    <form class="card" id="formProd">
+      <h2>Cadastrar produto</h2>
+      <label for="pNome">Nome do produto</label><input type="text" id="pNome" required>
+      <label for="pCat">Categoria</label>
+      <select id="pCat"><option>Farinha e derivados</option><option>Frutas e polpas</option><option>Leite e derivados</option><option>Carnes e derivados</option><option>Mel e derivados</option><option>Grãos e cereais</option><option>Hortaliças</option><option>Outro</option></select>
+      <label for="pDesc">Descrição e diferenciais</label><input type="text" id="pDesc">
+      <div class="grid2"><div><label for="pPreco">Preço (R$)</label><input type="number" id="pPreco" min="0" step="0.01"></div>
+      <div><label for="pUn">Unidade</label><input type="text" id="pUn" value="pacote 1 kg"></div></div>
+      <div class="row"><button class="primary" type="submit">Salvar produto</button></div>
+    </form>
+    <div class="card"><h2>Produtos cadastrados</h2><div id="listaProd" class="tblwrap"></div></div>
+  </div>
+</section>
+
+<section data-view="contatos">
+  <div class="grid">
+    <form class="card" id="formCont">
+      <h2>Cadastrar contato</h2>
+      <p class="note">Cadastre só você e colegas que autorizaram. Nada de listas compradas.</p>
+      <label for="cNome">Nome</label><input type="text" id="cNome" required>
+      <label for="cTel">WhatsApp (código do país + DDD + número)</label><input type="tel" id="cTel" placeholder="5565999999999">
+      <label class="chk"><input type="checkbox" id="cCons"> Consentimento registrado</label>
+      <label class="chk"><input type="checkbox" id="cWa"> Autorizou receber mensagens pelo WhatsApp</label>
+      <label for="cObs">Origem do consentimento</label><input type="text" id="cObs" placeholder="ex.: colega de turma, autorizou em sala">
+      <div class="row"><button class="primary" type="submit">Salvar contato</button></div>
+    </form>
+    <div class="card"><h2>Base de contatos</h2><div id="listaCont" class="tblwrap"></div></div>
+  </div>
+</section>
+
+<section data-view="campanha">
+  <div class="grid">
+    <form class="card" id="formCamp">
+      <h2>Dados da campanha</h2>
+      <label for="kNome">Nome da campanha</label><input type="text" id="kNome" value="Sabores da Nossa Terra">
+      <label for="kProd">Produto</label><select id="kProd"></select>
+      <label for="kObj">Objetivo</label>
+      <select id="kObj"><option>Aumentar vendas</option><option>Lançamento de produto</option><option>Divulgar marca</option><option>Conquistar clientes</option><option>Promover oferta</option><option>Fidelizar clientes</option></select>
+      <label for="kPub">Público-alvo</label><input type="text" id="kPub" value="Responsáveis pelas compras, 35+, que compram no supermercado">
+      <label for="kBen">Principal benefício</label><input type="text" id="kBen" value="Torrada no forno a lenha, com selo de inspeção, feita por uma família da região.">
+      <label for="kOf">Oferta (opcional)</label><input type="text" id="kOf" value="cupom de R$ 2,00 na primeira compra">
+      <label for="kCta">Chamada para ação</label><input type="text" id="kCta" value="Mostre esta mensagem no caixa!">
+      <label for="kLink">Link de compra ou catálogo (opcional)</label><input type="text" id="kLink" placeholder="https://">
+      <div class="row"><button type="button" id="btnGerar">Gerar texto publicitário</button><button class="primary" type="submit">Salvar campanha</button></div>
+    </form>
+    <div class="card">
+      <h2>Texto da campanha</h2>
+      <label for="kTexto">Revise e edite antes de salvar</label>
+      <textarea id="kTexto"></textarea>
+      <p class="note">Escreva só o que é verdade sobre preço, disponibilidade, origem e características. O texto termina com a opção de descadastro.</p>
+      <h3>Campanhas salvas</h3>
+      <div id="listaCamp" class="tblwrap"></div>
+    </div>
+  </div>
+</section>
+
+<section data-view="enviar">
+  <div class="card" style="margin-bottom:16px">
+    <h2>Escolha a campanha</h2>
+    <select id="selCamp" aria-label="Campanha"></select>
+    <div id="previaCamp" class="preview" style="margin-top:10px"></div>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <h2>WhatsApp</h2>
+      <p class="note">Cada botão abre o WhatsApp com a mensagem já escrita para o contato. O envio final é você quem confirma, tocando em enviar.</p>
+      <div id="listaWa"></div>
+    </div>
+    <div class="card">
+      <h2>Facebook e Instagram</h2>
+      <ol class="steps">
+        <li><span>Copie o texto da campanha.</span></li>
+        <li><span><b>Facebook:</b> abra sua Página e cole o texto numa nova publicação. Se a campanha tiver link, use também o botão de compartilhar link.</span></li>
+        <li><span><b>Instagram:</b> no celular, crie a publicação com a foto do produto e cole o texto na legenda.</span></li>
+      </ol>
+      <div class="row">
+        <button class="primary" type="button" id="btnCopiar">Copiar texto da campanha</button>
+        <a class="btn" id="lnkFb" href="https://www.facebook.com/" target="_blank" rel="noopener">Abrir Facebook</a>
+        <a class="btn" href="https://www.instagram.com/" target="_blank" rel="noopener">Abrir Instagram</a>
+      </div>
+      <div class="row">
+        <button type="button" id="btnRegFb">Registrar: publiquei no Facebook</button>
+        <button type="button" id="btnRegIg">Registrar: publiquei no Instagram</button>
+      </div>
+      <p class="note" id="fbLinkNota"></p>
+    </div>
+  </div>
+</section>
+
+<section data-view="relatorio">
+  <div class="card" style="margin-bottom:16px">
+    <h2>Resumo</h2>
+    <div class="stats" id="resumo"></div>
+  </div>
+  <div class="card">
+    <h2>Histórico de envios e publicações</h2>
+    <div id="hist" class="tblwrap"></div>
+    <div class="row"><button type="button" id="btnCopiarHist">Copiar histórico (CSV)</button><button type="button" id="btnLimpar">Apagar meus dados deste navegador</button></div>
+    <p class="note">Os dados ficam só neste navegador. Para entregar ao professor, use “Copiar histórico” e cole numa planilha.</p>
+  </div>
+</section>
+
+</main>
+<footer>Prof. Dr. Ramão Humberto Martins Manvailer · Sistema didático. Use somente contatos com consentimento e respeite as regras de cada canal.</footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const EXEMPLO_CSV = `id,faixa_etaria,renda_familiar,local_compra,frequencia_compra,atributo_principal,conhece_produtor_local,canal_info,formato_conteudo,barreira_compra,disposicao_pagar_kg,intencao_compra,satisfacao_atual
+1,18 a 24,2 a 4 SM,Feira livre,Raramente,Qualidade/sabor,Sim,Instagram,Receita,Dúvida sobre higiene,8.50,4,3
+2,35 a 44,Até 2 SM,Feira livre,Semanal,Higiene e selo de inspeção,Sim,Indicação de conhecidos,História do produtor,Não conheço a marca,6.50,4,4
+3,60 ou mais,Acima de 8 SM,Direto do produtor,Raramente,Preço,Sim,WhatsApp,Receita,Não encontro onde comprar,11.00,5,3
+4,18 a 24,4 a 8 SM,Supermercado,Quinzenal,Preço,Não,Instagram,Vídeo curto,Preço alto,10.00,3,2
+5,35 a 44,Acima de 8 SM,Supermercado,Quinzenal,Embalagem,Não,Facebook,Vídeo curto,Não encontro onde comprar,16.00,4,3
+6,18 a 24,2 a 4 SM,Feira livre,Quinzenal,Qualidade/sabor,Não,Instagram,Foto com preço,Preço alto,8.00,5,2
+7,35 a 44,2 a 4 SM,Feira livre,Quinzenal,Higiene e selo de inspeção,Não,Instagram,Promoção/cupom,Preço alto,11.00,4,4
+8,35 a 44,2 a 4 SM,Feira livre,Quinzenal,Embalagem,Sim,Instagram,Receita,Dúvida sobre higiene,12.00,5,2
+9,60 ou mais,4 a 8 SM,Supermercado,Raramente,Qualidade/sabor,Não,Indicação de conhecidos,Receita,Preço alto,18.00,2,4
+10,18 a 24,Até 2 SM,Feira livre,Semanal,Origem regional,Não,Instagram,Vídeo curto,Não encontro onde comprar,9.50,2,2
+11,18 a 24,4 a 8 SM,Supermercado,Mensal,Higiene e selo de inspeção,Não,Instagram,Receita,Não encontro onde comprar,12.50,5,3
+12,35 a 44,4 a 8 SM,Supermercado,Quinzenal,Origem regional,Não,Indicação de conhecidos,Receita,Não encontro onde comprar,10.50,3,1
+13,45 a 59,Acima de 8 SM,Supermercado,Quinzenal,Higiene e selo de inspeção,Não,WhatsApp,Vídeo curto,Não encontro onde comprar,16.00,3,3
+14,45 a 59,Até 2 SM,Feira livre,Quinzenal,Preço,Sim,WhatsApp,Promoção/cupom,Não conheço a marca,10.00,4,3
+15,35 a 44,2 a 4 SM,Supermercado,Mensal,Origem regional,Sim,Instagram,Foto com preço,Nenhuma,15.00,4,4
+16,45 a 59,Até 2 SM,Direto do produtor,Raramente,Qualidade/sabor,Não,Indicação de conhecidos,Receita,Nenhuma,8.00,5,5
+17,25 a 34,2 a 4 SM,Feira livre,Semanal,Qualidade/sabor,Não,Instagram,Foto com preço,Dúvida sobre higiene,10.00,4,3
+18,18 a 24,4 a 8 SM,Direto do produtor,Mensal,Higiene e selo de inspeção,Sim,Rádio local,Promoção/cupom,Não conheço a marca,15.50,3,4
+19,45 a 59,2 a 4 SM,Mercearia do bairro,Quinzenal,Qualidade/sabor,Não,Facebook,Receita,Não encontro onde comprar,11.00,2,3
+20,25 a 34,Até 2 SM,Feira livre,Semanal,Preço,Não,WhatsApp,História do produtor,Dúvida sobre higiene,8.00,4,3
+21,35 a 44,2 a 4 SM,Supermercado,Mensal,Qualidade/sabor,Sim,WhatsApp,Vídeo curto,Preço alto,14.00,3,3
+22,18 a 24,Até 2 SM,Supermercado,Mensal,Preço,Não,Instagram,História do produtor,Não conheço a marca,8.50,3,2
+23,60 ou mais,2 a 4 SM,Supermercado,Quinzenal,Embalagem,Não,Facebook,Promoção/cupom,Não conheço a marca,13.00,3,4
+24,45 a 59,2 a 4 SM,Supermercado,Mensal,Qualidade/sabor,Não,Indicação de conhecidos,Foto com preço,Dúvida sobre higiene,11.00,3,5
+25,35 a 44,2 a 4 SM,Feira livre,Mensal,Qualidade/sabor,Não,WhatsApp,Foto com preço,Preço alto,10.00,2,4
+26,25 a 34,2 a 4 SM,Supermercado,Quinzenal,Qualidade/sabor,Sim,Instagram,História do produtor,Nenhuma,12.00,4,2
+27,25 a 34,Até 2 SM,Supermercado,Quinzenal,Preço,Sim,Instagram,Promoção/cupom,Não conheço a marca,9.50,3,2
+28,35 a 44,Até 2 SM,Feira livre,Mensal,Preço,Não,WhatsApp,Promoção/cupom,Preço alto,6.00,4,3
+29,45 a 59,Acima de 8 SM,Mercearia do bairro,Quinzenal,Embalagem,Não,WhatsApp,Promoção/cupom,Preço alto,16.00,4,2
+30,35 a 44,4 a 8 SM,Feira livre,Semanal,Origem regional,Sim,Rádio local,Promoção/cupom,Dúvida sobre higiene,13.50,5,2
+31,45 a 59,2 a 4 SM,Supermercado,Quinzenal,Origem regional,Sim,Indicação de conhecidos,Promoção/cupom,Não encontro onde comprar,13.50,5,2
+32,60 ou mais,2 a 4 SM,Mercearia do bairro,Quinzenal,Origem regional,Sim,Facebook,Vídeo curto,Dúvida sobre higiene,12.00,4,4
+33,18 a 24,2 a 4 SM,Direto do produtor,Semanal,Qualidade/sabor,Não,Instagram,Promoção/cupom,Não encontro onde comprar,11.50,3,2
+34,35 a 44,4 a 8 SM,Mercearia do bairro,Raramente,Embalagem,Sim,Facebook,Foto com preço,Não conheço a marca,12.00,5,5
+35,35 a 44,4 a 8 SM,Feira livre,Semanal,Preço,Sim,WhatsApp,Foto com preço,Não conheço a marca,16.00,5,1
+36,45 a 59,2 a 4 SM,Feira livre,Mensal,Preço,Não,WhatsApp,Receita,Dúvida sobre higiene,11.00,3,2
+37,35 a 44,Até 2 SM,Direto do produtor,Semanal,Preço,Sim,Indicação de conhecidos,Foto com preço,Preço alto,7.00,3,4
+38,45 a 59,2 a 4 SM,Supermercado,Mensal,Qualidade/sabor,Não,WhatsApp,História do produtor,Preço alto,10.00,3,2
+39,18 a 24,4 a 8 SM,Feira livre,Semanal,Qualidade/sabor,Não,Instagram,Promoção/cupom,Preço alto,15.00,4,3
+40,35 a 44,Até 2 SM,Supermercado,Quinzenal,Preço,Sim,Indicação de conhecidos,História do produtor,Preço alto,13.50,3,1
+41,60 ou mais,4 a 8 SM,Mercearia do bairro,Mensal,Preço,Sim,WhatsApp,Foto com preço,Nenhuma,12.50,4,3
+42,25 a 34,2 a 4 SM,Feira livre,Mensal,Preço,Não,Instagram,Vídeo curto,Não encontro onde comprar,10.00,5,4
+43,25 a 34,Até 2 SM,Supermercado,Quinzenal,Preço,Não,WhatsApp,História do produtor,Não conheço a marca,9.50,4,3
+44,35 a 44,2 a 4 SM,Supermercado,Quinzenal,Preço,Não,Facebook,Receita,Não encontro onde comprar,11.50,3,4
+45,25 a 34,4 a 8 SM,Mercearia do bairro,Raramente,Higiene e selo de inspeção,Não,Instagram,Foto com preço,Não conheço a marca,13.50,5,3
+46,35 a 44,Até 2 SM,Direto do produtor,Quinzenal,Origem regional,Sim,WhatsApp,Promoção/cupom,Preço alto,10.50,4,3
+47,25 a 34,Até 2 SM,Direto do produtor,Mensal,Preço,Não,Instagram,Foto com preço,Não encontro onde comprar,6.50,4,3
+48,25 a 34,Até 2 SM,Mercearia do bairro,Raramente,Qualidade/sabor,Sim,Rádio local,Promoção/cupom,Não conheço a marca,11.00,4,3
+49,35 a 44,Até 2 SM,Feira livre,Semanal,Preço,Não,Facebook,História do produtor,Não encontro onde comprar,10.00,3,2
+50,25 a 34,Acima de 8 SM,Supermercado,Mensal,Preço,Sim,Instagram,Promoção/cupom,Dúvida sobre higiene,13.50,5,4
+51,45 a 59,Até 2 SM,Feira livre,Semanal,Origem regional,Não,WhatsApp,Foto com preço,Não conheço a marca,10.00,4,3
+52,25 a 34,Até 2 SM,Feira livre,Quinzenal,Preço,Sim,WhatsApp,Foto com preço,Não conheço a marca,9.00,3,4
+53,18 a 24,2 a 4 SM,Direto do produtor,Semanal,Qualidade/sabor,Sim,Instagram,História do produtor,Dúvida sobre higiene,11.50,5,4
+54,45 a 59,2 a 4 SM,Feira livre,Mensal,Qualidade/sabor,Sim,Rádio local,Foto com preço,Não encontro onde comprar,12.50,5,3
+55,35 a 44,4 a 8 SM,Direto do produtor,Raramente,Origem regional,Sim,Rádio local,Receita,Não encontro onde comprar,17.50,3,3
+56,45 a 59,2 a 4 SM,Supermercado,Semanal,Origem regional,Sim,Rádio local,Promoção/cupom,Não encontro onde comprar,13.50,5,3
+57,60 ou mais,4 a 8 SM,Supermercado,Quinzenal,Qualidade/sabor,Não,Rádio local,Promoção/cupom,Preço alto,15.50,4,1
+58,35 a 44,2 a 4 SM,Feira livre,Raramente,Origem regional,Sim,WhatsApp,História do produtor,Preço alto,11.50,3,5
+59,35 a 44,2 a 4 SM,Supermercado,Quinzenal,Qualidade/sabor,Não,WhatsApp,Promoção/cupom,Não conheço a marca,9.50,4,2
+60,35 a 44,Até 2 SM,Mercearia do bairro,Semanal,Qualidade/sabor,Sim,Facebook,Foto com preço,Nenhuma,8.50,4,3
+61,35 a 44,Até 2 SM,Mercearia do bairro,Raramente,Origem regional,Sim,Instagram,Foto com preço,Nenhuma,10.50,3,1
+62,25 a 34,2 a 4 SM,Feira livre,Quinzenal,Higiene e selo de inspeção,Não,Instagram,Foto com preço,Não encontro onde comprar,11.00,4,3
+63,18 a 24,2 a 4 SM,Supermercado,Quinzenal,Preço,Sim,Instagram,História do produtor,Não encontro onde comprar,9.00,3,4
+64,25 a 34,Até 2 SM,Supermercado,Semanal,Preço,Sim,WhatsApp,Promoção/cupom,Preço alto,8.00,4,3
+65,25 a 34,4 a 8 SM,Feira livre,Raramente,Qualidade/sabor,Sim,Indicação de conhecidos,Vídeo curto,Dúvida sobre higiene,14.50,3,4
+66,18 a 24,Acima de 8 SM,Mercearia do bairro,Mensal,Higiene e selo de inspeção,Não,Indicação de conhecidos,Promoção/cupom,Nenhuma,14.00,5,3
+67,60 ou mais,Até 2 SM,Supermercado,Mensal,Preço,Sim,Facebook,Vídeo curto,Nenhuma,11.00,5,2
+68,35 a 44,2 a 4 SM,Feira livre,Semanal,Preço,Não,Instagram,Foto com preço,Não encontro onde comprar,10.00,3,3
+69,45 a 59,Até 2 SM,Supermercado,Mensal,Preço,Sim,WhatsApp,História do produtor,Não encontro onde comprar,10.00,5,3
+70,60 ou mais,4 a 8 SM,Direto do produtor,Mensal,Preço,Não,Facebook,Foto com preço,Preço alto,11.50,3,3
+71,25 a 34,Acima de 8 SM,Feira livre,Quinzenal,Preço,Não,Instagram,História do produtor,Não conheço a marca,13.50,3,3
+72,25 a 34,2 a 4 SM,Direto do produtor,Mensal,Qualidade/sabor,Não,Rádio local,Foto com preço,Dúvida sobre higiene,12.50,3,2
+73,25 a 34,2 a 4 SM,Mercearia do bairro,Mensal,Preço,Não,WhatsApp,Vídeo curto,Não conheço a marca,10.00,4,3
+74,25 a 34,Até 2 SM,Feira livre,Semanal,Preço,Sim,Indicação de conhecidos,Foto com preço,Não encontro onde comprar,10.50,4,4
+75,45 a 59,4 a 8 SM,Direto do produtor,Quinzenal,Origem regional,Sim,WhatsApp,Foto com preço,Não encontro onde comprar,14.50,4,4
+76,45 a 59,4 a 8 SM,Feira livre,Raramente,Origem regional,Sim,WhatsApp,Foto com preço,Não conheço a marca,17.50,4,2
+77,35 a 44,2 a 4 SM,Feira livre,Raramente,Origem regional,Sim,Rádio local,Foto com preço,Preço alto,15.50,4,3
+78,35 a 44,2 a 4 SM,Feira livre,Quinzenal,Preço,Sim,WhatsApp,Vídeo curto,Não conheço a marca,11.50,4,4
+79,25 a 34,Acima de 8 SM,Feira livre,Mensal,Higiene e selo de inspeção,Não,Instagram,História do produtor,Nenhuma,12.00,4,3
+80,25 a 34,2 a 4 SM,Feira livre,Mensal,Higiene e selo de inspeção,Não,Indicação de conhecidos,Receita,Preço alto,13.00,4,2
+81,18 a 24,Até 2 SM,Supermercado,Mensal,Preço,Não,Instagram,Vídeo curto,Não encontro onde comprar,9.00,4,3
+82,35 a 44,2 a 4 SM,Mercearia do bairro,Mensal,Preço,Sim,Rádio local,Vídeo curto,Não encontro onde comprar,11.50,4,4
+83,35 a 44,Até 2 SM,Supermercado,Mensal,Higiene e selo de inspeção,Não,Instagram,Receita,Não encontro onde comprar,9.00,4,1
+84,18 a 24,Acima de 8 SM,Direto do produtor,Quinzenal,Embalagem,Sim,Instagram,Foto com preço,Nenhuma,16.00,4,3
+85,35 a 44,4 a 8 SM,Mercearia do bairro,Quinzenal,Preço,Sim,Indicação de conhecidos,Receita,Preço alto,12.00,4,4
+86,45 a 59,Até 2 SM,Direto do produtor,Mensal,Preço,Sim,Indicação de conhecidos,Foto com preço,Não conheço a marca,6.50,3,3
+87,25 a 34,4 a 8 SM,Mercearia do bairro,Quinzenal,Higiene e selo de inspeção,Não,WhatsApp,Foto com preço,Não encontro onde comprar,12.00,3,3
+88,45 a 59,Até 2 SM,Mercearia do bairro,Mensal,Preço,Sim,Facebook,Promoção/cupom,Preço alto,11.50,4,3
+89,60 ou mais,2 a 4 SM,Supermercado,Quinzenal,Embalagem,Não,Facebook,Foto com preço,Preço alto,10.00,3,4
+90,45 a 59,2 a 4 SM,Feira livre,Mensal,Preço,Sim,Indicação de conhecidos,Foto com preço,Preço alto,11.50,3,4
+91,25 a 34,2 a 4 SM,Feira livre,Raramente,Qualidade/sabor,Não,Indicação de conhecidos,Vídeo curto,Preço alto,11.50,4,4
+92,18 a 24,Até 2 SM,Supermercado,Semanal,Origem regional,Não,Rádio local,Receita,Não encontro onde comprar,9.00,3,2
+93,35 a 44,Até 2 SM,Supermercado,Quinzenal,Qualidade/sabor,Não,Rádio local,História do produtor,Não encontro onde comprar,7.00,3,3
+94,60 ou mais,2 a 4 SM,Supermercado,Mensal,Qualidade/sabor,Não,Facebook,Promoção/cupom,Preço alto,12.00,4,3
+95,18 a 24,2 a 4 SM,Mercearia do bairro,Semanal,Preço,Sim,Instagram,Receita,Dúvida sobre higiene,8.00,5,3
+96,45 a 59,4 a 8 SM,Feira livre,Quinzenal,Higiene e selo de inspeção,Não,WhatsApp,Foto com preço,Dúvida sobre higiene,12.00,4,3
+97,18 a 24,2 a 4 SM,Supermercado,Quinzenal,Qualidade/sabor,Não,Instagram,História do produtor,Não encontro onde comprar,12.00,4,4
+98,18 a 24,2 a 4 SM,Direto do produtor,Quinzenal,Preço,Não,WhatsApp,Vídeo curto,Não conheço a marca,11.50,3,2
+99,35 a 44,2 a 4 SM,Supermercado,Mensal,Embalagem,Não,Rádio local,Receita,Não conheço a marca,10.50,5,1
+100,25 a 34,Acima de 8 SM,Direto do produtor,Quinzenal,Embalagem,Não,WhatsApp,Foto com preço,Nenhuma,14.50,5,3
+101,25 a 34,Até 2 SM,Mercearia do bairro,Mensal,Qualidade/sabor,Não,Instagram,Promoção/cupom,Não conheço a marca,11.50,2,3
+102,45 a 59,2 a 4 SM,Mercearia do bairro,Semanal,Embalagem,Sim,Facebook,Foto com preço,Não encontro onde comprar,13.50,5,3
+103,45 a 59,2 a 4 SM,Feira livre,Semanal,Higiene e selo de inspeção,Não,Instagram,História do produtor,Não conheço a marca,14.00,4,4
+104,60 ou mais,2 a 4 SM,Feira livre,Mensal,Preço,Não,Facebook,Promoção/cupom,Dúvida sobre higiene,9.50,2,4
+105,18 a 24,2 a 4 SM,Feira livre,Raramente,Preço,Sim,Indicação de conhecidos,Promoção/cupom,Nenhuma,10.50,5,3
+106,60 ou mais,2 a 4 SM,Direto do produtor,Semanal,Higiene e selo de inspeção,Não,WhatsApp,Foto com preço,Dúvida sobre higiene,12.50,3,2
+107,45 a 59,2 a 4 SM,Supermercado,Quinzenal,Preço,Sim,Instagram,Vídeo curto,Preço alto,9.50,4,2
+108,45 a 59,Acima de 8 SM,Supermercado,Quinzenal,Origem regional,Não,Indicação de conhecidos,Promoção/cupom,Preço alto,16.50,4,4
+109,25 a 34,Até 2 SM,Supermercado,Mensal,Qualidade/sabor,Não,Instagram,Promoção/cupom,Não encontro onde comprar,9.00,5,4
+110,18 a 24,Até 2 SM,Direto do produtor,Mensal,Preço,Não,Facebook,Promoção/cupom,Preço alto,7.50,3,2
+111,18 a 24,4 a 8 SM,Supermercado,Semanal,Higiene e selo de inspeção,Sim,Instagram,Receita,Preço alto,14.00,5,3
+112,60 ou mais,2 a 4 SM,Supermercado,Quinzenal,Preço,Não,Indicação de conhecidos,História do produtor,Dúvida sobre higiene,13.00,5,4
+113,25 a 34,Até 2 SM,Mercearia do bairro,Mensal,Preço,Não,WhatsApp,Receita,Não encontro onde comprar,12.50,2,4
+114,18 a 24,Até 2 SM,Supermercado,Semanal,Embalagem,Não,WhatsApp,História do produtor,Não conheço a marca,10.00,1,3
+115,18 a 24,2 a 4 SM,Supermercado,Quinzenal,Embalagem,Não,Instagram,História do produtor,Não encontro onde comprar,9.00,4,4
+116,25 a 34,Até 2 SM,Supermercado,Semanal,Qualidade/sabor,Não,Rádio local,Vídeo curto,Preço alto,6.50,3,3
+117,18 a 24,Até 2 SM,Supermercado,Quinzenal,Qualidade/sabor,Não,WhatsApp,Promoção/cupom,Não encontro onde comprar,6.00,3,5
+118,25 a 34,Até 2 SM,Direto do produtor,Mensal,Origem regional,Não,Instagram,Vídeo curto,Preço alto,14.00,2,3
+119,35 a 44,2 a 4 SM,Supermercado,Mensal,Qualidade/sabor,Não,WhatsApp,Receita,Dúvida sobre higiene,14.00,4,4
+120,25 a 34,4 a 8 SM,Supermercado,Mensal,Higiene e selo de inspeção,Não,Indicação de conhecidos,Promoção/cupom,Nenhuma,14.50,3,2`;
+const ROTEIRO = `ROTEIRO DE QUESTIONÁRIO – PESQUISA DE MERCADO PARA PRODUTO AGROINDUSTRIAL
+Universidade do Estado de Mato Grosso – UNEMAT
+Curso de Engenharia de Produção Agroindustrial – Disciplina de Marketing
+Prof. Dr. Ramão Humberto Martins Manvailer
+
+Objetivo: identificar o perfil do consumidor, os atributos valorizados, os canais de
+informação e as barreiras de compra de um produto agroindustrial regional
+(ex.: farinha de mandioca artesanal), para orientar a criação de uma campanha.
+
+Termo de abertura (ler ao respondente):
+"Esta pesquisa faz parte de uma atividade acadêmica da UNEMAT. A participação é
+voluntária e anônima. Os dados serão usados apenas para fins didáticos.
+Você aceita participar?"  ( ) Sim  ( ) Não -> encerrar
+
+Cada pergunta corresponde a uma coluna do arquivo CSV (nome entre colchetes).
+Mantenha os nomes das colunas para que o aplicativo gere as sugestões automáticas.
+
+1. [faixa_etaria] Qual a sua idade?
+   18 a 24 | 25 a 34 | 35 a 44 | 45 a 59 | 60 ou mais
+
+2. [renda_familiar] Qual a renda familiar mensal aproximada? (SM = salário mínimo)
+   Até 2 SM | 2 a 4 SM | 4 a 8 SM | Acima de 8 SM
+
+3. [local_compra] Onde você costuma comprar este produto?
+   Supermercado | Feira livre | Direto do produtor | Mercearia do bairro
+
+4. [frequencia_compra] Com que frequência compra?
+   Semanal | Quinzenal | Mensal | Raramente
+
+5. [atributo_principal] O que MAIS pesa na sua escolha? (marque só uma)
+   Qualidade/sabor | Preço | Origem regional | Higiene e selo de inspeção | Embalagem
+
+6. [conhece_produtor_local] Você conhece algum produtor/agroindústria local deste produto?
+   Sim | Não
+
+7. [canal_info] Por onde você mais fica sabendo de novos produtos de alimentação?
+   WhatsApp | Instagram | Facebook | Indicação de conhecidos | Rádio local
+
+8. [formato_conteudo] Que tipo de conteúdo mais chama sua atenção?
+   Vídeo curto | Foto com preço | Receita | História do produtor | Promoção/cupom
+
+9. [barreira_compra] O que mais impede você de comprar de agroindústrias locais?
+   Não encontro onde comprar | Preço alto | Não conheço a marca | Dúvida sobre higiene | Nenhuma
+
+10. [disposicao_pagar_kg] Quanto pagaria, no máximo, por 1 kg de um produto artesanal
+    de boa qualidade? (valor em R$, use ponto como separador decimal, ex.: 12.50)
+
+11. [intencao_compra] De 1 (nada provável) a 5 (muito provável), qual a chance de você
+    experimentar o produto da agroindústria local no próximo mês?
+
+12. [satisfacao_atual] De 1 (muito insatisfeito) a 5 (muito satisfeito), qual sua
+    satisfação com o produto que você compra hoje?
+
+Orientações de aplicação
+- Aplique em formulário on-line (Google Forms/Microsoft Forms) ou entrevista presencial.
+- Exporte as respostas para CSV, renomeie os cabeçalhos para os nomes entre colchetes
+  e inclua uma primeira coluna "id" (1, 2, 3...).
+- Não colete nome, telefone ou CPF na pesquisa: ela é anônima (LGPD). Quem quiser
+  receber ofertas deve se cadastrar separadamente, com consentimento registrado.
+- Registre: público-alvo, local e data da coleta, tipo de amostra e número de respondentes.`;
+const PRODUTOS_INI = [
+  {produto:"Farinha de mandioca artesanal",categoria:"Farinha e derivados",descricao:"Torrada em forno a lenha, produção familiar",preco:"12.90",unidade:"pacote 1 kg"},
+  {produto:"Polpa de cupuaçu",categoria:"Frutas e polpas",descricao:"Polpa congelada, sem conservantes",preco:"9.50",unidade:"pacote 500 g"},
+  {produto:"Mel silvestre",categoria:"Mel e derivados",descricao:"Mel de florada nativa do cerrado",preco:"28.00",unidade:"pote 500 g"}];
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const brl = v => "R$ " + Number(v).toFixed(2).replace(".", ",");
+const pct = v => v.toFixed(1).replace(".", ",") + "%";
+function toast(msg){ const t=$("toast"); t.textContent=msg; t.classList.add("show"); clearTimeout(toast._t); toast._t=setTimeout(()=>t.classList.remove("show"),2600); }
+
+// ---------- armazenamento local (pode não existir) ----------
+const store = {
+  get(k, d){ try{ const v = localStorage.getItem("campagro_"+k); return v ? JSON.parse(v) : d; }catch(e){ return d; } },
+  set(k, v){ try{ localStorage.setItem("campagro_"+k, JSON.stringify(v)); }catch(e){} }
+};
+let estado = {
+  produtos: store.get("produtos", PRODUTOS_INI),
+  contatos: store.get("contatos", []),
+  campanhas: store.get("campanhas", []),
+  log: store.get("log", []),
+  pesquisa: null
+};
+const salvar = k => store.set(k, estado[k]);
+
+// ---------- CSV ----------
+function parseCSV(txt){
+  const linhas = []; let campo = "", linha = [], aspas = false;
+  txt = txt.replace(/^﻿/, "");
+  for (let i = 0; i < txt.length; i++){
+    const c = txt[i];
+    if (aspas){ if (c === '"'){ if (txt[i+1] === '"'){ campo += '"'; i++; } else aspas = false; } else campo += c; }
+    else if (c === '"') aspas = true;
+    else if (c === "," || c === ";"){ linha.push(campo); campo = ""; }
+    else if (c === "\n" || c === "\r"){ if (c === "\r" && txt[i+1] === "\n") i++; linha.push(campo); campo = ""; if (linha.some(x => x !== "")) linhas.push(linha); linha = []; }
+    else campo += c;
+  }
+  linha.push(campo); if (linha.some(x => x !== "")) linhas.push(linha);
+  const cab = linhas.shift().map(s => s.trim());
+  return linhas.map(l => Object.fromEntries(cab.map((c, j) => [c, (l[j] ?? "").trim()])));
+}
+const toCSV = (rows, cols) => [cols.join(","), ...rows.map(r => cols.map(c => '"' + String(r[c] ?? "").replace(/"/g, '""') + '"').join(","))].join("\n");
+
+// ---------- PESQUISA ----------
+const ORDEM = {
+  faixa_etaria:["18 a 24","25 a 34","35 a 44","45 a 59","60 ou mais"],
+  renda_familiar:["Até 2 SM","2 a 4 SM","4 a 8 SM","Acima de 8 SM"],
+  frequencia_compra:["Semanal","Quinzenal","Mensal","Raramente"],
+  intencao_compra:["1","2","3","4","5"], satisfacao_atual:["1","2","3","4","5"] };
+function ehNumerica(col){
+  const v = estado.pesquisa.map(r => r[col]).filter(x => x !== "");
+  const nums = v.map(x => Number(String(x).replace(",", ".")));
+  return v.length && nums.every(n => !isNaN(n)) && new Set(v).size > 6;
+}
+const numCol = col => estado.pesquisa.map(r => Number(String(r[col]).replace(",", "."))).filter(n => !isNaN(n));
+function freq(col){
+  const m = new Map(); estado.pesquisa.forEach(r => { const k = r[col] || "(vazio)"; m.set(k, (m.get(k) || 0) + 1); });
+  let arr = [...m.entries()];
+  if (ORDEM[col]) arr.sort((a,b) => ORDEM[col].indexOf(a[0]) - ORDEM[col].indexOf(b[0]));
+  else arr.sort((a,b) => b[1] - a[1]);
+  return arr;
+}
+function quantil(a, q){ const s = [...a].sort((x,y)=>x-y); const p = (s.length-1)*q, b = Math.floor(p); return s[b] + (s[Math.min(b+1,s.length-1)] - s[b])*(p-b); }
+
+function carregarPesquisa(rows, origem){
+  if (!rows.length){ toast("O arquivo não tem respostas."); return; }
+  estado.pesquisa = rows;
+  const cols = Object.keys(rows[0]).filter(c => c !== "id");
+  $("selVar").innerHTML = cols.map(c => `<option>${esc(c)}</option>`).join("");
+  $("selCruz").innerHTML = `<option value="">(nenhuma)</option>` + cols.map(c => `<option>${esc(c)}</option>`).join("");
+  if (cols.includes("canal_info")) $("selVar").value = "canal_info";
+  if (cols.includes("faixa_etaria")) $("selCruz").value = "faixa_etaria";
+  $("nResp").textContent = `${rows.length} respondentes · ${origem}`;
+  desenharPesquisa(); toast("Base carregada: " + rows.length + " respostas.");
+}
+function desenharPesquisa(){
+  if (!estado.pesquisa) return;
+  const col = $("selVar").value; $("tituloDist").textContent = "Distribuição: " + col;
+  if (ehNumerica(col)){
+    const a = numCol(col), media = a.reduce((x,y)=>x+y,0)/a.length;
+    const ehReal = /pagar|preco|valor/.test(col);
+    const f = v => ehReal ? brl(v) : v.toFixed(2).replace(".", ",");
+    // histograma em 6 faixas
+    const mn = Math.min(...a), mx = Math.max(...a), k = 6, w = (mx - mn) / k || 1;
+    const bins = Array.from({length:k}, (_, i) => ({lo: mn + i*w, hi: mn + (i+1)*w, n: 0}));
+    a.forEach(v => bins[Math.min(k-1, Math.floor((v - mn) / w))].n++);
+    const maxn = Math.max(...bins.map(b => b.n));
+    $("dist").innerHTML = `<div class="stats">
+      <div class="stat"><b>${f(quantil(a,.5))}</b><span>mediana</span></div>
+      <div class="stat"><b>${f(media)}</b><span>média</span></div>
+      <div class="stat"><b>${f(mn)}</b><span>mínimo</span></div>
+      <div class="stat"><b>${f(mx)}</b><span>máximo</span></div></div>
+      <div class="bars" style="margin-top:14px">${bins.map(b => `<div class="bar"><span>${f(b.lo)} a ${f(b.hi)}</span><div class="track"><div class="fill" style="width:${100*b.n/maxn}%"></div></div><span class="v">${b.n}</span></div>`).join("")}</div>`;
+  } else {
+    const fr = freq(col), tot = fr.reduce((s, x) => s + x[1], 0), mx = Math.max(...fr.map(x => x[1]));
+    $("dist").innerHTML = `<div class="bars">${fr.map(([k, n]) => `<div class="bar${n === mx ? " top" : ""}"><span>${esc(k)}</span><div class="track"><div class="fill" style="width:${100*n/mx}%"></div></div><span class="v">${pct(100*n/tot)}</span></div>`).join("")}</div>
+      <div class="tblwrap"><table><thead><tr><th>Resposta</th><th class="num">Frequência</th><th class="num">%</th></tr></thead><tbody>${fr.map(([k,n]) => `<tr><td>${esc(k)}</td><td class="num">${n}</td><td class="num">${pct(100*n/tot)}</td></tr>`).join("")}</tbody></table></div>`;
+  }
+  desenharCruz(); desenharInsights();
+}
+function desenharCruz(){
+  const a = $("selVar").value, b = $("selCruz").value;
+  if (!b || a === b){ $("cruz").innerHTML = `<p class="empty">Escolha uma variável diferente em “Cruzar com”.</p>`; return; }
+  const na = ehNumerica(a), nb = ehNumerica(b);
+  if (na && nb){ $("cruz").innerHTML = `<p class="empty">As duas variáveis são numéricas. Escolha uma categórica para cruzar.</p>`; return; }
+  if (na || nb){
+    const num = na ? a : b, cat = na ? b : a, g = new Map();
+    estado.pesquisa.forEach(r => { const v = Number(String(r[num]).replace(",", ".")); if (isNaN(v)) return; const k = r[cat]; if (!g.has(k)) g.set(k, []); g.get(k).push(v); });
+    let ks = [...g.keys()]; if (ORDEM[cat]) ks.sort((x,y) => ORDEM[cat].indexOf(x) - ORDEM[cat].indexOf(y));
+    const ehReal = /pagar|preco|valor/.test(num);
+    $("cruz").innerHTML = `<table><thead><tr><th>${esc(cat)}</th><th class="num">Média de ${esc(num)}</th><th class="num">n</th></tr></thead><tbody>${ks.map(k => { const v = g.get(k), m = v.reduce((x,y)=>x+y,0)/v.length; return `<tr><td>${esc(k)}</td><td class="num">${ehReal ? brl(m) : m.toFixed(2).replace(".", ",")}</td><td class="num">${v.length}</td></tr>`; }).join("")}</tbody></table>`;
+    return;
+  }
+  const linhas = freq(b).map(x => x[0]), colunas = freq(a).map(x => x[0]);
+  const body = linhas.map(l => {
+    const sub = estado.pesquisa.filter(r => r[b] === l), n = sub.length;
+    const vals = colunas.map(c => 100 * sub.filter(r => r[a] === c).length / n), mx = Math.max(...vals);
+    return `<tr><td>${esc(l)} <span class="note">(n=${n})</span></td>${vals.map(v => `<td class="num"${v === mx ? ' style="font-weight:700;color:var(--brand)"' : ""}>${pct(v)}</td>`).join("")}</tr>`;
+  }).join("");
+  $("cruz").innerHTML = `<table><thead><tr><th>${esc(b)} \\ ${esc(a)}</th>${colunas.map(c => `<th class="num">${esc(c)}</th>`).join("")}</tr></thead><tbody>${body}</tbody></table>`;
+}
+function desenharInsights(){
+  const cols = Object.keys(estado.pesquisa[0]);
+  const top = c => { if (!cols.includes(c)) return null; const f = freq(c).slice().sort((x,y)=>y[1]-x[1]); const t = f.reduce((s,x)=>s+x[1],0); return `${f[0][0]} (${Math.round(100*f[0][1]/t)}%)`; };
+  const regras = [["atributo_principal","Atributo mais valorizado","deve ser o argumento central da mensagem."],
+    ["canal_info","Canal onde o público se informa","deve ser o canal prioritário da campanha."],
+    ["local_compra","Local de compra preferido","indica onde o produto precisa estar (praça)."],
+    ["barreira_compra","Principal barreira de compra","a campanha ou a oferta precisa responder a ela."],
+    ["formato_conteudo","Formato de conteúdo preferido","orienta o tipo de peça."]];
+  let html = regras.map(([c, nome, acao]) => { const v = top(c); return v ? `<li><b>${nome}:</b> ${esc(v)} → ${acao}</li>` : ""; }).join("");
+  if (cols.includes("disposicao_pagar_kg")){ const a = numCol("disposicao_pagar_kg"); if (a.length) html += `<li><b>Disposição a pagar (mediana):</b> ${brl(quantil(a,.5))} por kg → compare com o custo e o preço atual antes de definir a oferta.</li>`; }
+  $("insights").innerHTML = `<ul class="insights">${html}</ul><p class="note">Amostra por conveniência descreve os respondentes, não toda a população. Use os resultados como hipóteses.</p>`;
+}
+$("btnExemplo").onclick = () => carregarPesquisa(parseCSV(EXEMPLO_CSV), "base de exemplo (fictícia)");
+$("arqCsv").onchange = e => { const f = e.target.files[0]; if (!f) return; const r = new FileReader(); r.onload = () => { try { carregarPesquisa(parseCSV(r.result), f.name); } catch(err){ toast("Não consegui ler o CSV. Confira o separador e o cabeçalho."); } }; r.readAsText(f, "UTF-8"); };
+$("selVar").onchange = desenharPesquisa; $("selCruz").onchange = desenharCruz;
+async function copiar(txt, ok){ try { await navigator.clipboard.writeText(txt); toast(ok); } catch(e){ toast("O navegador bloqueou a cópia. Selecione o texto e use Ctrl+C."); } }
+$("btnRoteiro").onclick = () => copiar(ROTEIRO, "Roteiro copiado. Cole num documento ou formulário.");
+
+// ---------- PRODUTOS ----------
+function desenharProdutos(){
+  $("listaProd").innerHTML = estado.produtos.length ? `<table><thead><tr><th>Produto</th><th>Categoria</th><th class="num">Preço</th><th>Unidade</th><th></th></tr></thead><tbody>${estado.produtos.map((p,i) => `<tr><td><b>${esc(p.produto)}</b><br><span class="note">${esc(p.descricao)}</span></td><td>${esc(p.categoria)}</td><td class="num">${p.preco ? brl(p.preco) : "—"}</td><td>${esc(p.unidade)}</td><td><button type="button" data-delprod="${i}">Remover</button></td></tr>`).join("")}</tbody></table>` : `<p class="empty">Nenhum produto.</p>`;
+  $("kProd").innerHTML = estado.produtos.map(p => `<option>${esc(p.produto)}</option>`).join("");
+}
+$("formProd").onsubmit = e => { e.preventDefault(); estado.produtos.push({produto:$("pNome").value.trim(), categoria:$("pCat").value, descricao:$("pDesc").value.trim(), preco:$("pPreco").value, unidade:$("pUn").value.trim()}); salvar("produtos"); e.target.reset(); $("pUn").value = "pacote 1 kg"; desenharProdutos(); toast("Produto salvo."); };
+$("listaProd").onclick = e => { const i = e.target.dataset.delprod; if (i === undefined) return; estado.produtos.splice(+i, 1); salvar("produtos"); desenharProdutos(); };
+
+// ---------- CONTATOS ----------
+const elegivel = c => c.consentimento && c.whatsapp && c.telefone.length >= 12;
+function desenharContatos(){
+  $("listaCont").innerHTML = estado.contatos.length ? `<table><thead><tr><th>Nome</th><th>WhatsApp</th><th>Situação</th><th></th></tr></thead><tbody>${estado.contatos.map((c,i) => `<tr><td>${esc(c.nome)}<br><span class="note">${esc(c.obs)}</span></td><td>${esc(c.telefone)}</td><td>${elegivel(c) ? '<span class="chip">pode receber</span>' : '<span class="chip off">sem autorização ou número</span>'}</td><td><button type="button" data-delcont="${i}">Remover</button></td></tr>`).join("")}</tbody></table>` : `<p class="empty">Nenhum contato. Comece cadastrando o seu próprio número.</p>`;
+}
+$("formCont").onsubmit = e => { e.preventDefault();
+  const tel = $("cTel").value.replace(/\D/g, "");
+  if (tel && tel.length < 12){ toast("Use código do país + DDD + número, ex.: 5565999999999."); return; }
+  estado.contatos.push({nome:$("cNome").value.trim(), telefone:tel, consentimento:$("cCons").checked, whatsapp:$("cWa").checked, obs:$("cObs").value.trim()});
+  salvar("contatos"); e.target.reset(); desenharContatos(); desenharEnvio(); toast("Contato salvo."); };
+$("listaCont").onclick = e => { const i = e.target.dataset.delcont; if (i === undefined) return; estado.contatos.splice(+i, 1); salvar("contatos"); desenharContatos(); desenharEnvio(); };
+
+// ---------- CAMPANHA ----------
+function gerarTexto(){
+  const of = $("kOf").value.trim(), link = $("kLink").value.trim();
+  $("kTexto").value = `🌱 ${$("kNome").value.trim()}\n\nConheça ${$("kProd").value || "nosso produto"}!\n${$("kBen").value.trim()}${of ? "\nOferta: " + of + "." : ""}\n\n${$("kCta").value.trim()}${link ? "\n" + link : ""}\n\nSe não quiser receber novas mensagens, responda SAIR.`;
+}
+$("btnGerar").onclick = gerarTexto;
+$("formCamp").onsubmit = e => { e.preventDefault();
+  if (!$("kTexto").value.trim()) gerarTexto();
+  estado.campanhas.unshift({data:new Date().toLocaleDateString("pt-BR"), nome:$("kNome").value.trim(), produto:$("kProd").value, objetivo:$("kObj").value, publico:$("kPub").value.trim(), texto:$("kTexto").value.trim(), link:$("kLink").value.trim()});
+  salvar("campanhas"); desenharCampanhas(); desenharEnvio(); toast("Campanha salva. Siga para Enviar e publicar."); };
+function desenharCampanhas(){
+  $("listaCamp").innerHTML = estado.campanhas.length ? `<table><thead><tr><th>Data</th><th>Campanha</th><th>Produto</th><th></th></tr></thead><tbody>${estado.campanhas.map((c,i) => `<tr><td>${esc(c.data)}</td><td>${esc(c.nome)}</td><td>${esc(c.produto)}</td><td><button type="button" data-delcamp="${i}">Remover</button></td></tr>`).join("")}</tbody></table>` : `<p class="empty">Nenhuma campanha salva.</p>`;
+}
+$("listaCamp").onclick = e => { const i = e.target.dataset.delcamp; if (i === undefined) return; estado.campanhas.splice(+i, 1); salvar("campanhas"); desenharCampanhas(); desenharEnvio(); };
+
+// ---------- ENVIO ----------
+const campAtual = () => estado.campanhas[+$("selCamp").value] || null;
+function registrar(canal, destino){ const c = campAtual(); estado.log.unshift({data:new Date().toLocaleString("pt-BR"), campanha:c ? c.nome : "", canal, destino, situacao: canal === "WhatsApp" ? "mensagem aberta no WhatsApp" : "publicação registrada pelo aluno"}); salvar("log"); desenharRelatorio(); }
+function desenharEnvio(){
+  const sel = $("selCamp"), atual = sel.value;
+  sel.innerHTML = estado.campanhas.length ? estado.campanhas.map((c,i) => `<option value="${i}">${esc(c.data)} · ${esc(c.nome)} · ${esc(c.produto)}</option>`).join("") : `<option value="">Nenhuma campanha salva</option>`;
+  if (atual && estado.campanhas[+atual]) sel.value = atual;
+  const c = campAtual();
+  $("previaCamp").textContent = c ? c.texto : "Crie e salve uma campanha na etapa 4.";
+  const alvos = estado.contatos.filter(elegivel);
+  if (!c){ $("listaWa").innerHTML = `<p class="empty">Salve uma campanha primeiro.</p>`; }
+  else if (!alvos.length){ $("listaWa").innerHTML = `<p class="empty">Nenhum contato pode receber. Na etapa 3, cadastre o número e marque as duas autorizações.</p>`; }
+  else $("listaWa").innerHTML = `<table><tbody>${alvos.map(a => `<tr><td><b>${esc(a.nome)}</b><br><span class="note">${esc(a.telefone)}</span></td><td style="text-align:right"><a class="btn wa" href="https://wa.me/${a.telefone}?text=${encodeURIComponent(c.texto)}" target="_blank" rel="noopener" data-wa="${esc(a.nome)}">Abrir no WhatsApp</a></td></tr>`).join("")}</tbody></table>`;
+  if (c && c.link){ $("lnkFb").href = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(c.link); $("lnkFb").textContent = "Compartilhar link no Facebook"; $("fbLinkNota").textContent = "O compartilhamento leva o link; cole o texto da campanha junto."; }
+  else { $("lnkFb").href = "https://www.facebook.com/"; $("lnkFb").textContent = "Abrir Facebook"; $("fbLinkNota").textContent = ""; }
+}
+$("selCamp").onchange = desenharEnvio;
+$("listaWa").onclick = e => { const a = e.target.closest("[data-wa]"); if (a) registrar("WhatsApp", a.dataset.wa); };
+$("btnCopiar").onclick = () => { const c = campAtual(); if (!c) return toast("Salve uma campanha primeiro."); copiar(c.texto, "Texto copiado. Cole na publicação."); };
+$("btnRegFb").onclick = () => { if (!campAtual()) return toast("Salve uma campanha primeiro."); registrar("Facebook", "Página"); toast("Publicação no Facebook registrada."); };
+$("btnRegIg").onclick = () => { if (!campAtual()) return toast("Salve uma campanha primeiro."); registrar("Instagram", "Perfil"); toast("Publicação no Instagram registrada."); };
+
+// ---------- RELATÓRIO ----------
+function desenharRelatorio(){
+  const cont = canal => estado.log.filter(l => l.canal === canal).length;
+  $("resumo").innerHTML = [["Campanhas", estado.campanhas.length], ["Contatos autorizados", estado.contatos.filter(elegivel).length], ["WhatsApp", cont("WhatsApp")], ["Facebook", cont("Facebook")], ["Instagram", cont("Instagram")]].map(([k,v]) => `<div class="stat"><b>${v}</b><span>${k}</span></div>`).join("");
+  $("hist").innerHTML = estado.log.length ? `<table><thead><tr><th>Data e hora</th><th>Campanha</th><th>Canal</th><th>Destino</th><th>Situação</th></tr></thead><tbody>${estado.log.map(l => `<tr><td>${esc(l.data)}</td><td>${esc(l.campanha)}</td><td>${esc(l.canal)}</td><td>${esc(l.destino)}</td><td>${esc(l.situacao)}</td></tr>`).join("")}</tbody></table>` : `<p class="empty">Nada registrado ainda.</p>`;
+}
+$("btnCopiarHist").onclick = () => copiar(toCSV(estado.log, ["data","campanha","canal","destino","situacao"]), "Histórico copiado. Cole numa planilha.");
+let confirmarLimpar = false;
+$("btnLimpar").onclick = e => {
+  if (!confirmarLimpar){ confirmarLimpar = true; e.target.textContent = "Clique de novo para confirmar"; setTimeout(() => { confirmarLimpar = false; e.target.textContent = "Apagar meus dados deste navegador"; }, 4000); return; }
+  ["produtos","contatos","campanhas","log"].forEach(k => { try { localStorage.removeItem("campagro_" + k); } catch(err){} });
+  estado.produtos = PRODUTOS_INI.slice(); estado.contatos = []; estado.campanhas = []; estado.log = [];
+  confirmarLimpar = false; e.target.textContent = "Apagar meus dados deste navegador";
+  desenharTudo(); toast("Dados apagados deste navegador.");
+};
+
+// ---------- navegação por abas ----------
+const VIEWS = ["pesquisa","produtos","contatos","campanha","enviar","relatorio"];
+function mostrar(){
+  const v = VIEWS.includes(location.hash.slice(1)) ? location.hash.slice(1) : "pesquisa";
+  document.querySelectorAll("section[data-view]").forEach(s => s.classList.toggle("on", s.dataset.view === v));
+  document.querySelectorAll("nav a").forEach(a => { if (a.getAttribute("href") === "#" + v) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current"); });
+}
+window.addEventListener("hashchange", mostrar);
+function desenharTudo(){ desenharProdutos(); desenharContatos(); desenharCampanhas(); desenharEnvio(); desenharRelatorio(); }
+desenharTudo(); gerarTexto(); mostrar();
+carregarPesquisa(parseCSV(EXEMPLO_CSV), "base de exemplo (fictícia)");
+</script>
+</body>
+</html>
