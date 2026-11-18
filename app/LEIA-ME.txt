@@ -1,25 +1,32 @@
-# Sistema de Campanhas de Marketing Agroindustrial — RStudio
+# Sistema de Campanhas de Marketing Agroindustrial — RStudio (versão v6, 18/11/2026)
 
 ## 1. Estrutura
-- `app.R`: aplicativo Shiny.
-- `INICIAR_APP.R`: inicializador.
-- `.Renviron.example`: modelo de variáveis de configuração da Meta.
-- `dados/`: criado automaticamente para produtos, contatos, campanhas, mídias e logs.
+- `app.R`: aplicativo Shiny (instala sozinho os pacotes que faltarem).
+- `INICIAR_APP.R`: alternativa ao botão Run App.
+- `.Renviron.example`: modelo de credenciais da Meta (só para o envio automático pela API).
+- `dados/`: produtos, contatos, campanhas, identificação da equipe, imagens, histórico e cópias de segurança.
 
 ## 2. Instalação e execução
-1. Extraia o ZIP em uma pasta do computador.
-2. Abra o RStudio.
-3. Use **File > Open Project** (ou abra a pasta pelo RStudio).
-4. Abra `INICIAR_APP.R`.
-5. Execute:
-   ```r
-   source("INICIAR_APP.R", encoding = "UTF-8")
-   ```
-6. O navegador abrirá o aplicativo.
+1. Extraia o ZIP numa pasta do computador (não abra o app de dentro do ZIP nem direto do WhatsApp).
+2. Abra `app.R` no RStudio e clique em **Run App**.
+3. Confira no topo do app: "versão 18/11/2026 – v6".
+4. Para atualizar o app, salve o novo `app.R` **por cima do antigo, na mesma pasta**. Os dados ficam preservados.
 
-O modo de planejamento, cadastro e simulação funciona sem credenciais Meta.
+## 2A. Fluxo da aula (sem credenciais)
+1. Painel: preencher a Identificação da equipe e salvar.
+2. Produtos, Contatos e Criar campanha: cadastrar e salvar (editar com dois cliques na tabela).
+3. Publicar e enviar:
+   - WhatsApp: botão "Abrir no WhatsApp" (o aluno confirma o envio) ou lista de transmissão para vários contatos;
+   - Facebook e Instagram: copiar o texto, baixar a imagem e publicar pelo Meta Business Suite; depois clicar em "Registrar".
+4. Relatórios: baixar o relatório em PDF.
+5. Painel: "Salvar meu trabalho" ao final de cada aula; "Continuar trabalho salvo" na aula seguinte.
 
-## 3. Configurar as credenciais Meta
+## 2B. Limitações conhecidas
+- O WhatsApp não permite envio sem confirmação a partir de uma conta pessoal. O envio automático exige a API da Meta com número comercial próprio.
+- O número de teste da Meta aceitou as mensagens (HTTP 200), mas não as entregou a celulares brasileiros nos testes realizados.
+- Para publicar no Instagram pelo Meta Business Suite, a conta precisa ser profissional e estar ligada à Página do Facebook.
+
+## 3. Configurar as credenciais Meta (somente envio automático pela API)
 1. Faça uma cópia de `.Renviron.example` chamada `.Renviron` na pasta do projeto.
 2. Substitua os valores de exemplo pelas credenciais reais obtidas no Meta for Developers / WhatsApp Manager.
 3. Reinicie o RStudio para carregar as variáveis.
@@ -35,7 +42,7 @@ Variáveis:
 - `FB_PAGE_ACCESS_TOKEN`
 - `META_API_VERSION`
 
-A versão inicial usa `v27.0` como padrão; confirme a versão atualmente disponível para seu aplicativo no painel da Meta antes de produção.
+A versão inicial usa `v26.0` como padrão; confirme a versão atualmente disponível para seu aplicativo no painel da Meta antes de produção.
 
 ## 4. WhatsApp
 O envio utiliza modelo aprovado. O modelo configurado em `WA_TEMPLATE_NAME` deve ter corpo com três variáveis posicionais:
